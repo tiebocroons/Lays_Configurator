@@ -1,6 +1,6 @@
 <template>
   <div class="admin-panel">
-    <h2>As an admin I can</h2>
+    <h2>Admin Panel</h2>
     <div class="tiles">
       <button @click="$router.push('/admin/votes')" class="tile">See current votes</button>
       <button @click="$router.push('/admin/submissions')" class="tile">Remove submissions</button>
