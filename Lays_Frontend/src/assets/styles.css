@@ -1,0 +1,9 @@
+body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 0; }
+.nav { display:flex; gap:12px; padding:12px; background:#ffeb3b; align-items:center }
+.spacer { flex:1 }
+.main { padding:18px }
+.auth input { display:block; margin:8px 0; padding:8px; width:300px }
+.bag-list { list-style:none; padding:0 }
+.bag-list li { margin:8px 0 }
+.bag-image { max-width:320px; display:block; margin:12px 0 }
+.error { color: red }
