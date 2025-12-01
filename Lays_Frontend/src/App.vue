@@ -4,6 +4,8 @@
       <router-link to="/">Home</router-link>
       <router-link to="/bags">Bags</router-link>
       <router-link to="/create">Create</router-link>
+      <router-link to="/configurator">Configurator</router-link>
+      <router-link to="/configurator-vue">Configurator (Vue)</router-link>
       <div class="spacer"></div>
       <template v-if="!token">
         <router-link to="/login">Login</router-link>
