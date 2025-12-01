@@ -5,8 +5,15 @@
     <div v-if="error" class="error">{{ error }}</div>
     <ul class="bag-list">
       <li v-for="bag in bags" :key="bag._id">
-        <router-link :to="`/bags/${bag._id}`">{{ bag.name }}</router-link>
-        <small>by {{ bag.user?.firstName || 'unknown' }}</small>
+        <div class="bag-row">
+          <div class="mini-preview" v-if="bag.modelUrl">
+            <ConfiguratorThree :modelUrl="bag.modelUrl" />
+          </div>
+          <div class="bag-meta">
+            <router-link :to="`/bags/${bag._id}`">{{ bag.name }}</router-link>
+            <small>by {{ bag.user?.firstName || 'unknown' }}</small>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
@@ -14,7 +21,10 @@
 
 <script>
 import api from '../api';
+import { defineAsyncComponent } from 'vue';
+const ConfiguratorThree = defineAsyncComponent(() => import('../components/ConfiguratorThree.vue'));
 export default {
+  components: { ConfiguratorThree },
   data() { return { bags: [], loading: false, error: null }; },
   async created() {
     this.loading = true;
@@ -26,3 +36,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.bag-row { display: flex; align-items: center; gap: 12px; }
+.mini-preview { width: 160px; height: 120px; border: 1px solid #ddd; overflow: hidden; }
+.mini-preview > * { width: 100%; height: 100%; }
+.bag-meta { display: flex; flex-direction: column; }
+</style>

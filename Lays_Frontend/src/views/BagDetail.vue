@@ -5,6 +5,9 @@
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="bag">
       <h2>{{ bag.name }}</h2>
+      <div v-if="bag.modelUrl" class="bag-model">
+        <ConfiguratorThree :modelUrl="bag.modelUrl" />
+      </div>
       <img v-if="bag.image" :src="bag.image" alt="bag image" class="bag-image" />
       <p><strong>Color:</strong> {{ bag.bagColor }}</p>
       <p><strong>Font:</strong> {{ bag.font }}</p>
@@ -20,8 +23,10 @@
 <script>
 import api from '../api';
 import VoteButton from '../components/VoteButton.vue';
+import { defineAsyncComponent } from 'vue';
+const ConfiguratorThree = defineAsyncComponent(() => import('../components/ConfiguratorThree.vue'));
 export default {
-  components: { VoteButton },
+  components: { VoteButton, ConfiguratorThree },
   props: ['id'],
   data() { return { bag: null, loading: false, error: null }; },
   async created() { await this.load(); },
@@ -39,3 +44,7 @@ export default {
   }
 }
 </script>
+<style scoped>
+.bag-model { width: 100%; height: 60vh; margin-bottom: 12px; }
+.bag-image { max-width: 400px; display: block; margin-bottom: 12px; }
+</style>
