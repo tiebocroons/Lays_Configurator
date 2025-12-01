@@ -20,7 +20,18 @@
 import api from '../api';
 export default {
   data() {
-    return { name: '', image: '', bagColor: '', font: '', pattern: '', packaging: '', inspiration: '', keyFlavours: '', error: null };
+    return {
+      name: '',
+      image: '',
+      bagColor: '',
+      font: '',
+      pattern: '',
+      packaging: '',
+      inspiration: '',
+      keyFlavours: '',
+      modelUrl: '/configurator/models/chips_bag.glb',
+      error: null
+    };
   },
   methods: {
     async submit() {
@@ -34,7 +45,8 @@ export default {
           pattern: this.pattern,
           packaging: this.packaging,
           inspiration: this.inspiration,
-          keyFlavours: this.keyFlavours.split(',').map(s => s.trim()).filter(Boolean)
+          keyFlavours: this.keyFlavours.split(',').map(s => s.trim()).filter(Boolean),
+          modelUrl: this.modelUrl
         };
         await api.post('/bag', body);
         window.location.href = '/bags';
