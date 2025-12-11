@@ -32,12 +32,34 @@ const loader = new GLTFLoader();
 // When deployed under the frontend's `public/configurator` folder the model
 // should be placed at `/configurator/models/chips_bag.glb` so use that absolute
 // path here so the loader resolves correctly from the iframe.
-const modelPath = '/configurator/models/chips_bag.glb';
+const modelPath = '/configurator/models/chips_fixed.glb';
 
 loader.load(
   modelPath,
   (gltf) => {
     const root = gltf.scene || gltf.scenes[0];
+    // Debug: print node/mesh/material hierarchy
+    try {
+      console.group('GLTF structure:', modelPath);
+      function dump(node, indent = '') {
+        const type = node.type || (node.isMesh ? 'Mesh' : 'Object3D');
+        console.log(indent + (node.name || '(no-name)') + ' — ' + type);
+        if (node.isMesh) {
+          console.log(indent + '  geometry:', node.geometry?.type || node.geometry?.constructor?.name);
+          if (node.material) {
+            if (Array.isArray(node.material)) node.material.forEach((m, i) => console.log(indent + `  material[${i}]:`, m.name || m.type));
+            else console.log(indent + '  material:', node.material.name || node.material.type);
+          }
+        }
+        if (node.children && node.children.length) node.children.forEach(c => dump(c, indent + '  '));
+      }
+      dump(root, '');
+      if (gltf.parser && gltf.parser.json) {
+        console.log('glTF JSON summary:', { scenes: gltf.parser.json.scenes?.length, nodes: gltf.parser.json.nodes?.length, meshes: gltf.parser.json.meshes?.length });
+      }
+      console.groupEnd();
+    } catch (e) { console.warn('Error logging glTF', e); }
+
     root.position.set(0, 0, 0);
     root.rotation.y = Math.PI;
     scene.add(root);
