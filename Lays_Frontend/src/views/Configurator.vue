@@ -3,7 +3,7 @@
     <h2>Configurator</h2>
     <p>If the configurator files have been copied to <code>/public/configurator</code>, the embedded app will appear below.</p>
     <div class="config-frame">
-      <iframe ref="frame" src="/configurator/index.html" frameborder="0" style="width:100%;height:80vh"></iframe>
+      <iframe ref="frame" src="/configurator/index.html" frameborder="0" class="config-iframe"></iframe>
     </div>
   </div>
 </template>
@@ -34,7 +34,6 @@ export default {
           doc.head && doc.head.appendChild(style);
         } catch (err) {
           // likely cross-origin or not ready; ignore silently
-          // console.warn('Could not manipulate iframe content', err);
         }
       });
     });
@@ -46,4 +45,5 @@ export default {
 
 <style scoped>
 .config-frame { margin-top: 16px }
+.config-iframe { width: 100%; height: 80vh; border: none; }
 </style>
