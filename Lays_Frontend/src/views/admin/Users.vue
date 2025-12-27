@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="admin-users-page">
     <h3>All Users</h3>
     
     <div v-if="loading" class="loading">Loading...</div>
@@ -93,124 +93,182 @@ export default {
   }
 };
 </script>
-
 <style scoped>
-.error {
-  color: #dc3545;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #f5c6cb;
-  border-radius: 4px;
-  background-color: #f8d7da;
+.admin-users-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #e5e7eb;
+  padding: 20px;
+}
+
+.admin-users-page h3 {
+  color: #fbbf24;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.loading, .error, .no-users {
+  text-align: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+  margin: 20px 0;
 }
 
 .loading {
-  color: #666;
-  padding: 10px;
-  font-style: italic;
+  color: #e5e7eb;
 }
 
-.users-list {
-  margin-top: 20px;
+.error {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fecaca;
 }
 
-table {
+.no-users {
+  color: #9ca3af;
+}
+
+.users-list table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 thead {
-  background-color: #f8f9fa;
+  background: linear-gradient(135deg, rgba(251,191,36,0.1) 0%, rgba(245,158,11,0.1) 100%);
 }
 
 th, td {
-  padding: 12px;
+  padding: 16px;
   text-align: left;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 th {
+  color: #fbbf24;
   font-weight: 600;
-  color: #333;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-tr:hover {
-  background-color: #f8f9fa;
+td {
+  color: #e5e7eb;
+  font-size: 0.9rem;
 }
 
-tr.banned {
+tbody tr:hover {
+  background: rgba(255,255,255,0.02);
+  transition: background 0.2s ease;
+}
+
+tbody tr.banned {
+  background: rgba(239, 68, 68, 0.1);
   opacity: 0.7;
-  background-color: #fff5f5;
 }
 
-button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
+tbody tr:last-child td {
+  border-bottom: none;
 }
 
-.ban-btn {
-  background-color: #dc3545;
-  color: white;
-}
-
-.ban-btn:hover {
-  background-color: #c82333;
-}
-
-.unban-btn {
-  background-color: #28a745;
-  color: white;
-}
-
-.unban-btn:hover {
-  background-color: #218838;
+.admin-badge, .user-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .admin-badge {
-  background-color: #007bff;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
+  background: linear-gradient(135deg, rgba(251,191,36,0.9) 0%, rgba(245,158,11,0.9) 100%);
+  color: #0f172a;
 }
 
 .user-badge {
-  background-color: #6c757d;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 .banned-badge {
-  background-color: #dc3545;
-  color: white;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 12px;
   font-size: 12px;
   font-weight: 600;
 }
 
 .active-badge {
-  background-color: #28a745;
-  color: white;
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 12px;
   font-size: 12px;
   font-weight: 600;
 }
 
-.no-users {
-  color: #666;
-  padding: 20px;
-  text-align: center;
-  font-style: italic;
+.ban-btn, .unban-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.ban-btn {
+  background: linear-gradient(135deg, rgba(239,68,68,0.9) 0%, rgba(220,38,38,0.9) 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+}
+
+.ban-btn:hover {
+  background: linear-gradient(135deg, rgba(220,38,38,0.9) 0%, rgba(239,68,68,0.9) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239,68,68,0.4);
+}
+
+.unban-btn {
+  background: linear-gradient(135deg, rgba(34,197,94,0.9) 0%, rgba(22,163,74,0.9) 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(34,197,94,0.3);
+}
+
+.unban-btn:hover {
+  background: linear-gradient(135deg, rgba(22,163,74,0.9) 0%, rgba(34,197,94,0.9) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34,197,94,0.4);
+}
+
+@media (max-width: 768px) {
+  .admin-users-page {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    padding: 12px 8px;
+  }
+
+  .ban-btn, .unban-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
 }
 </style>

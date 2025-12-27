@@ -14,6 +14,7 @@
           <router-link to="/register">Register</router-link>
         </template>
         <template v-else>
+          <router-link to="/user-detail">My Account</router-link>
           <router-link v-if="isAdmin" to="/admin">Admin</router-link>
           <button @click="logout">Logout</button>
         </template>

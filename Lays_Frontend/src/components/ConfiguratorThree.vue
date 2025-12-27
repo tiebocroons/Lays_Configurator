@@ -1,4 +1,11 @@
 <template>
+  <div class="configurator-three">
+    <div class="viewer-wrap">
+      <div ref="viewer" class="viewer">
+        <canvas ref="canvas"></canvas>
+      </div>
+    </div>
+
     <aside v-if="!readOnly" class="config-panel">
       <label>Choose bag color
         <div class="color-grid">
@@ -57,12 +64,7 @@
         {{ saveMessage }}
       </div>
     </aside>
-
-    <div class="viewer-wrap">
-      <div ref="viewer" class="viewer">
-        <canvas ref="canvas"></canvas>
-      </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -549,7 +551,7 @@ export default {
 </script>
 
 <style>
-.configurator-vue { display: flex; gap: 24px; padding: 20px; min-height: 100vh; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+.configurator-three { display: flex; gap: 24px; padding: 20px; min-height: 100vh; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
 .config-panel { 
   width: 320px; 
   background: rgba(15, 23, 42, 0.9); 

@@ -10,6 +10,7 @@ import AdminVotes from '../views/admin/Votes.vue';
 import AdminSubmissions from '../views/admin/Submissions.vue';
 import AdminUsers from '../views/admin/Users.vue';
 import AdminBan from '../views/admin/Ban.vue';
+import UserDetail from '../views/UserDetail.vue';
 
 export default [
   { path: '/', redirect: '/bags' },
@@ -18,9 +19,11 @@ export default [
   { path: '/bag-showcase', component: BagShowcase },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
-  ,{ path: '/configurator', component: Configurator }
-  ,{ path: '/configurator-vue', component: ConfiguratorVue }
-  ,{ path: '/admin', component: Admin },
+  { path: '/configurator', component: Configurator },
+  { path: '/configurator-vue', component: ConfiguratorVue },
+  { path: '/configuratorThree', redirect: '/configurator-vue' },
+  { path: '/user-detail', component: UserDetail },
+  { path: '/admin', component: Admin },
   { path: '/admin/votes', component: AdminVotes },
   { path: '/admin/submissions', component: AdminSubmissions },
   { path: '/admin/users', component: AdminUsers },
