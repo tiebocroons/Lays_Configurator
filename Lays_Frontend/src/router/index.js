@@ -1,5 +1,6 @@
 import Bags from '../views/Bags.vue';
 import BagDetail from '../views/BagDetail.vue';
+import BagShowcase from '../views/BagShowcase.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Configurator from '../views/Configurator.vue';
@@ -14,6 +15,7 @@ export default [
   { path: '/', redirect: '/bags' },
   { path: '/bags', component: Bags },
   { path: '/bags/:id', component: BagDetail, props: true },
+  { path: '/bag-showcase', component: BagShowcase },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   ,{ path: '/configurator', component: Configurator }

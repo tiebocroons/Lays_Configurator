@@ -1,0 +1,15 @@
+{
+  "name": "lays-configurator-root",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm --prefix ./Lays_API install && npm --prefix ./Lays_Frontend install",
+    "start:api": "npm --prefix ./Lays_API run dev",
+    "start:frontend": "npm --prefix ./Lays_Frontend run dev",
+    "dev": "concurrently \"npm --prefix ./Lays_API run dev\" \"npm --prefix ./Lays_Frontend run dev\""
+  },
+  "devDependencies": {
+    "canvas": "^3.2.0",
+    "concurrently": "^8.2.0"
+  }
+}
