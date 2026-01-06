@@ -2,3 +2,8 @@ node_modules
 
 # Vite build output
 Lays_Frontend/dist/
+
+# Local environment files
+.env
+Lays_API/.env
+Lays_Frontend/.env
