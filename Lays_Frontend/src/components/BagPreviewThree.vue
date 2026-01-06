@@ -166,10 +166,8 @@ export default {
           const mats = Array.isArray(n.material) ? n.material : [n.material];
           mats.forEach((m) => {
             if (m && m.name === 'BagText') {
-              console.log('Applying text to BagText material:', m, 'color before:', m.color);
               m.map = tex;
               m.color.set(0xffffff);
-              console.log('color after:', m.color);
               m.emissive.set(0,0,0);
               m.alphaTest = 0.5;
               m.transparent = true;
@@ -181,7 +179,6 @@ export default {
       });
       // fallback: apply to first color target
       if (!applied && colorTargets && colorTargets.length) {
-        console.log('BagText not found, applying to colorTarget:', colorTargets[0].material);
         const n = colorTargets[0];
         if (n.material) {
           const mats = Array.isArray(n.material) ? n.material : [n.material];

@@ -136,38 +136,18 @@ export default {
       const loader = new GLTFLoader();
       loader.load(props.modelUrl, (gltf) => {
         model = gltf.scene || gltf.scenes[0];
-        // Debug: log GLB structure (nodes, meshes, materials)
+        // Detect likely bag meshes/materials to color
         try {
-          console.group('GLTF structure:', props.modelUrl);
-          function dumpNode(node, indent = '') {
-            const type = node.type || (node.isMesh ? 'Mesh' : 'Object3D');
-            console.log(indent + (node.name || '(no-name)') + ' — ' + type);
-            if (node.isMesh) {
-              console.log(indent + '  geometry:', node.geometry?.type || node.geometry?.constructor?.name);
-              if (node.material) {
-                if (Array.isArray(node.material)) node.material.forEach((m, i) => console.log(indent + `  material[${i}]:`, m.name || m.type));
-                else console.log(indent + '  material:', node.material.name || node.material.type);
-              }
-            }
-            if (node.children && node.children.length) node.children.forEach(c => dumpNode(c, indent + '  '));
-          }
-          dumpNode(model, '');
-          // detect likely bag meshes/materials to color
-          try {
-            colorTargets = [];
-            model.traverse((n) => {
-              if (n.isMesh) colorTargets.push(n);
-            });
-            // prefer meshes whose name or material name suggests packaging
-            const prefer = colorTargets.filter(m => /bag|pack|wrap|packaging|pouch/i.test(m.name) || (m.material && ((m.material.name && /bag|pack|wrap/i.test(m.material.name)) || (Array.isArray(m.material) && m.material.some(mm=> mm.name && /bag|pack|wrap/i.test(mm.name))))));
-            if (prefer.length) colorTargets = prefer;
-            console.log('Color targets count:', colorTargets.length);
-          } catch (e) { console.warn('color target detection failed', e); }
-          if (gltf.parser && gltf.parser.json) {
-            console.log('glTF JSON summary:', { scenes: gltf.parser.json.scenes?.length, nodes: gltf.parser.json.nodes?.length, meshes: gltf.parser.json.meshes?.length });
-          }
-          console.groupEnd();
-        } catch (e) { console.warn('Error logging GLTF structure', e); }
+          colorTargets = [];
+          model.traverse((n) => {
+            if (n.isMesh) colorTargets.push(n);
+          });
+          // Prefer meshes whose name or material name suggests packaging
+          const prefer = colorTargets.filter(m => /bag|pack|wrap|packaging|pouch/i.test(m.name) || (m.material && ((m.material.name && /bag|pack|wrap/i.test(m.material.name)) || (Array.isArray(m.material) && m.material.some(mm=> mm.name && /bag|pack|wrap/i.test(mm.name))))));
+          if (prefer.length) colorTargets = prefer;
+        } catch (e) {
+          console.warn('color target detection failed', e);
+        }
 
         model.position.set(0, 0, 0);
         model.rotation.y = Math.PI;
@@ -510,7 +490,6 @@ export default {
         }
         saveMessage.value = 'Bag saved successfully!';
         setTimeout(() => { saveMessage.value = ''; }, 3000);
-        console.log('Bag saved:', response.data);
       } catch (error) {
         console.error('Failed to save bag:', error);
         console.error('Error response:', error.response?.data);

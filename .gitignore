@@ -1,1 +1,4 @@
 node_modules
+
+# Vite build output
+Lays_Frontend/dist/
