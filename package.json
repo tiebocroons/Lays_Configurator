@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "npm --prefix ./Lays_Frontend start",
-    "postinstall": "npm --prefix ./Frontend install --omit=dev",
+    "postinstall": "npm --prefix ./Lays_Frontend install --omit=dev",
     "install:all": "npm --prefix ./Lays_API install && npm --prefix ./Lays_Frontend install",
     "start:api": "npm --prefix ./Lays_API run dev",
     "start:frontend": "npm --prefix ./Lays_Frontend run dev",
