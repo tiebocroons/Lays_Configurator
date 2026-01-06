@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "npm --prefix ./Lays_API start",
     "postinstall": "npm --prefix ./Lays_API install --omit=dev",
     "install:all": "npm --prefix ./Lays_API install && npm --prefix ./Lays_Frontend install",
     "start:api": "npm --prefix ./Lays_API run dev",
     "start:frontend": "npm --prefix ./Lays_Frontend run dev",
-    "start": "concurrently \"npm --prefix ./Lays_API run dev\" \"npm --prefix ./Lays_Frontend run dev\""
+    "dev": "concurrently \"npm --prefix ./Lays_API run dev\" \"npm --prefix ./Lays_Frontend run dev\""
   },
   "devDependencies": {
     "canvas": "^3.2.0",
