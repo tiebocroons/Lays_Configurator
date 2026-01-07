@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_BASE || (import.meta.env.DEV ? 'http://localhost:4000/api/v1' : '/api/v1');
+const API_BASE =
+  import.meta.env.VITE_API_BASE ||
+  (import.meta.env.DEV
+    ? 'http://localhost:4000/api/v1'
+    : 'https://lays-api-f5e978f9aa73.herokuapp.com/api/v1');
 
 const api = axios.create({
   baseURL: API_BASE,
