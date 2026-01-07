@@ -1,3 +1,6 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/api/v1/(.*)", "destination": "https://lays-api-f5e978f9aa73.herokuapp.com/api/v1/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
